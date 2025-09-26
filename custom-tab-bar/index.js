@@ -1,4 +1,6 @@
 // custom-tab-bar/index.js
+// 在使用页面引入 /utils/setTabBar
+// 在onLoad中调用 setTabBar.call(this, 0)
 Component({
   data: {
     selected: 0,
@@ -20,13 +22,7 @@ Component({
   
   lifetimes: {
     attached() {
-      // 从全局状态获取当前选中索引
-      const app = getApp();
-      if (app.globalData.tabBarSelectedIndex !== undefined) {
-        this.setData({
-          selected: app.globalData.tabBarSelectedIndex
-        });
-      }
+      
     }
   },
   
@@ -34,19 +30,8 @@ Component({
     switchTab(e) {
       const data = e.currentTarget.dataset;
       const url = data.path;
-      const index = data.index;
       
-      // 更新全局选中状态
-      const app = getApp()
-      app.globalData.tabBarSelectedIndex = index
-      
-      wx.switchTab({ url }, () => {
-        this.setData({
-          selected: app.globalData.tabBarSelectedIndex
-        }, () => {
-          console.log(this.data.selected);
-        });
-      });
+      wx.switchTab({ url })
     }
   }
 });

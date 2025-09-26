@@ -4,8 +4,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  bottom: 250rpx;
-  right: 40rpx;
+  /* bottom: 250rpx;
+  right: 40rpx; */
   height: 100rpx;
   width: 100rpx;
   background: rgba(255, 255, 253, 0.8);

@@ -1,1 +1,9 @@
 /* pages/home/hoem.wxss */
+page {
+	box-sizing: border-box;
+	padding: 36rpx;
+}
+
+button {
+	margin-bottom: 30rpx;
+}

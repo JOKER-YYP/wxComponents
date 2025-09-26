@@ -136,7 +136,7 @@ Page({
     });
   },
 
-  // 获取数据列表 - 模拟版本
+  // 获取数据列表 - 模拟
   getCardList() {
     wx.showLoading({
       title: '加载中',
@@ -159,6 +159,23 @@ Page({
         });
       });
     }, 800);
+  },
+
+  // 图片预览
+  previewcre(e) {
+    let { index, imgs } = e.currentTarget.dataset
+    let cres = imgs
+
+    let img = cres.map(e => {
+      return {
+        url: this.data.baseURL + e.url,
+        type: 'image'
+      }
+    })
+    wx.previewMedia({
+      current: index,
+      sources: img,
+    })
   },
 
   /**

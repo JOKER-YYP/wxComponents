@@ -12,6 +12,14 @@ Component({
     border: {
       type: Boolean,
       value: false
+    },
+    bottom: {
+      type: String,
+      value: '250rpx'
+    },
+    right: {
+      type: String,
+      value: '40rpx'
     }
   },
 
@@ -35,7 +43,7 @@ Component({
       this.triggerEvent('returntop');
     },
 
-    // 新增：处理滚动逻辑的方法
+    // 处理滚动逻辑的方法
     onScroll(scrollTop) {
       const systemInfo = wx.getSystemInfoSync();
       const rpxRatio = systemInfo.windowWidth / 750;

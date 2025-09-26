@@ -1,5 +1,5 @@
 // index.js
-// pages/home/hoem.js
+let { setTabBar } = require('../../utils/setTabBar')
 Page({
 
   /**
@@ -9,11 +9,29 @@ Page({
 
   },
 
+  goAddForm() {
+    wx.navigateTo({
+      url: '/pages/addForm/addForm',
+    })
+  },
+
+  goAIChat() {
+    wx.navigateTo({
+      url: '/pages/aiChat/aiChat',
+    })
+  },
+
+  goCard() {
+    wx.navigateTo({
+      url: '/pages/cardPage/cardPage',
+    })
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-    
+    setTabBar.call(this, 1)
   },
 
   /**
@@ -27,7 +45,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow() {
-    getApp().globalData.tabBarSelectedIndex = 1 // 当前页面对应的索引
+    
   },
 
   /**

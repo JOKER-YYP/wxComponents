@@ -2,6 +2,6 @@
 <!-- <view class="back-to-top" bindtap="handleReturnTop" hidden="{{!show}}">
   <image src="/assets/top.png" class="icon" />
 </view> -->
-<view class="back-to-top {{show ? 'show' : ''}} {{shape == 'circle' ? 'circle' : 'square'}} {{border ? 'border' : ''}}" bindtap="handleReturnTop">
+<view class="back-to-top {{show ? 'show' : ''}} {{shape == 'circle' ? 'circle' : 'square'}} {{border ? 'border' : ''}}" style="right: {{right}}; bottom: {{bottom}};" bindtap="handleReturnTop">
   <image src="/assets/top.png" class="icon" />
 </view>

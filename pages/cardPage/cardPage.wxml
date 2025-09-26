@@ -1,16 +1,16 @@
 <!-- pages/cardPage/cardPage.wxml -->
 <y-navbar id="navbar" background="transparent" border="none" btnBgc="transparent"/>
 <swiper class="swiper" vertical="true" easing-function="easeInOutCubic" current="{{currentIndex}}" bindchange="cardChange">
-  <swiper-item class="swiper-item" wx:for="{{cardList}}" wx:key="index">
+  <swiper-item class="swiper-item" wx:for="{{cardList}}" wx:for-item="card" wx:key="index">
     <view class="box">
       <view class="swiper-box">
-        <swiper class="img-swiper" circular="true" current="{{item.swiperImgIndex}}" data-index="{{index}}" bindchange="swiperChange">
-          <swiper-item class="swiper-img-item" wx:for="{{item.horizontal_shows}}" wx:key="index">
-            <image src="{{baseURL+item.url}}"></image>
+        <swiper class="img-swiper" circular="true" current="{{card.swiperImgIndex}}" data-index="{{index}}" bindchange="swiperChange">
+          <swiper-item class="swiper-img-item" wx:for="{{card.horizontal_shows}}" wx:key="index">
+            <image src="{{baseURL+item.url}}" bindtap="previewcre" data-index="{{index}}" data-imgs="{{card.horizontal_shows}}"></image>
           </swiper-item>
         </swiper>
         <scroll-view scroll-x="true" class="swiper-abbreviate">
-          <view class="swiper-abbreviate-item" wx:for="{{item.horizontal_shows}}" wx:for-index="customIndex" wx:key="customIndex" data-item="{{index}}" data-index="{{customIndex}}" bindtap="selectImg">
+          <view class="swiper-abbreviate-item" wx:for="{{card.horizontal_shows}}" wx:for-index="customIndex" wx:key="customIndex" data-item="{{index}}" data-index="{{customIndex}}" bindtap="selectImg">
 						<image src="{{baseURL+item.url}}"></image>
           </view>
         </scroll-view>
@@ -18,29 +18,30 @@
       <view class="card-content">
         <view class="card-tags">
           <view class="features-wrapper">
-            <view wx:for="{{item.categoryList}}" wx:key="index" class="certified_features" wx:if="{{item.categoryId}}">
+            <view wx:for="{{card.categoryList}}" wx:key="index" class="certified_features" wx:if="{{item.categoryId}}">
               <text>{{item.name}}</text>
             </view>
-            <view wx:for="{{item.generalFeatureList}}" wx:key="index" class="general_features">
+            <view wx:for="{{card.generalFeatureList}}" wx:key="index" class="general_features">
               <text>{{item}}</text>
             </view>
           </view>
         </view>
-        <view class="card-location">{{item.location_province}} · {{item.location_city}}</view>
-        <view class="card-title">{{item.ellipsis}}</view>
+        <view class="card-location">{{card.location_province}} · {{card.location_city}}</view>
+        <view class="card-title">{{card.ellipsis}}</view>
         <view class="card-time">
-          <text>{{item.startdate}} - {{item.enddate}}</text>
+          <text>{{card.startdate}} - {{card.enddate}}</text>
         </view>
         <view class="card-activity">
-          <text>{{item.activity_type}}</text>
+          <text>{{card.activity_type}}</text>
           <text> · </text>
-          <text>住宿{{item.activity_mode}}</text>
+          <text>住宿{{card.activity_mode}}</text>
+        </view>
+				<view class="card-finish-tags">
+          <view class="card-selling">{{card.sellingPoint}}</view>
+          <view class="card-cluster">{{card.clusterStatus=='NOT_CLUSTER'?'未成团':item.clusterStatus=='IS_CLUSTER'?'已成团':'已结束'}}</view>
         </view>
         <view class="card-btn">
-          <view class="card-finish-tags">
-            <view class="card-selling">{{item.sellingPoint}}</view>
-            <view class="card-cluster">{{item.clusterStatus=='NOT_CLUSTER'?'未成团':item.clusterStatus=='IS_CLUSTER'?'已成团':'已结束'}}</view>
-          </view>
+          <view class="card-price">￥<text>{{card.price}}</text></view>
           <view class="detail-btn">查看详情</view>
         </view>
       </view>

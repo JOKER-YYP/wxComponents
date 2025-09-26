@@ -1,10 +1,9 @@
 <!--pages/home/hoem.wxml-->
-<button bindtap="goAddForm">自定义表单</button>
+
 <button bindtap="goCalendar">日历组件</button>
 <button bindtap="goTabs">Tabs组件</button>
 <button bindtap="goWatch">Watch方法</button>
 <button bindtap="goFab">悬浮按钮</button>
 <button bindtap="goNavbar">导航栏</button>
-<button bindtap="goAIChat">模拟AI对话功能</button>
+
 <button bindtap="goBackToTop">返回顶部</button>
-<button bindtap="goCard">卡片商品展示</button>

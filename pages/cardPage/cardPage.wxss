@@ -125,22 +125,6 @@ page{
   text-align: center;
 }
 
-.share-btn {
-  height: 56rpx;
-  width: 56rpx;
-  border-radius: 50%;
-  border: 1rpx solid #E6E6E6;
-  background-color: #FFFFFDCC;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.share-btn image {
-  width: 36rpx;
-  height: 36rpx;
-}
-
 .card-location {
   font-size: 20rpx;
   color: #4D4D4D;
@@ -168,12 +152,13 @@ page{
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  margin-top: 6rpx;
+  margin-top: 12rpx;
 }
 
 .card-finish-tags {
   display: flex;
-  font-size: 20rpx;
+	font-size: 20rpx;
+	margin-top: 18rpx;
 }
 
 .card-selling {
@@ -200,6 +185,15 @@ page{
   color: #3389D2;
   gap: 20rpx;
   text-align: center;
+}
+
+.card-price {
+	color: #ee0a24;
+	font-size: 32rpx;
+}
+
+.card-price text {
+	font-size: 48rpx;
 }
 
 .detail-btn {

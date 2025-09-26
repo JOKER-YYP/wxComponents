@@ -1,2 +1,4 @@
 <!--index.wxml-->
-index
+<button bindtap="goAddForm">自定义表单</button>
+<button bindtap="goAIChat">模拟AI对话功能</button>
+<button bindtap="goCard">卡片商品展示</button>

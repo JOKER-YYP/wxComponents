@@ -1,7 +1,7 @@
 // app.js
 App({
   globalData: {
-    tabBarSelectedIndex: 0 // 初始选中索引
+
   },
   onLaunch() {
     // 展示本地存储能力

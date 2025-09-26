@@ -1,4 +1,5 @@
 // pages/home/hoem.js
+let { setTabBar } = require('../../utils/setTabBar')
 Page({
 
   /**
@@ -6,12 +7,6 @@ Page({
    */
   data: {
 
-  },
-
-  goAddForm() {
-    wx.navigateTo({
-      url: '/pages/addForm/addForm',
-    })
   },
 
   goCalendar() {
@@ -44,21 +39,9 @@ Page({
     })
   },
 
-  goAIChat() {
-    wx.navigateTo({
-      url: '/pages/aiChat/aiChat',
-    })
-  },
-
   goBackToTop() {
     wx.navigateTo({
       url: '/pages/backToTop/backToTop',
-    })
-  },
-
-  goCard() {
-    wx.navigateTo({
-      url: '/pages/cardPage/cardPage',
     })
   },
 
@@ -66,7 +49,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-    
+    setTabBar.call(this, 0)
   },
 
   /**
@@ -80,7 +63,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow() {
-    getApp().globalData.tabBarSelectedIndex = 0 // 当前页面对应的索引
+    
   },
 
   /**
