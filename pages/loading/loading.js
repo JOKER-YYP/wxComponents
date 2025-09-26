@@ -1,5 +1,4 @@
-// pages/home/hoem.js
-let { setTabBar } = require('../../utils/setTabBar')
+// pages/loading/loading.js
 Page({
 
   /**
@@ -9,53 +8,11 @@ Page({
 
   },
 
-  goCalendar() {
-    wx.navigateTo({
-      url: '/pages/calendar/calendar',
-    })
-  },
-
-  goTabs() {
-    wx.navigateTo({
-      url: '/pages/tabs/tabs',
-    })
-  },
-
-  goWatch() {
-    wx.navigateTo({
-      url: '/pages/watch/watch',
-    })
-  },
-
-  goFab() {
-    wx.navigateTo({
-      url: '/pages/fab/fab',
-    })
-  },
-
-  goNavbar() {
-    wx.navigateTo({
-      url: '/pages/navbar/navbar',
-    })
-  },
-
-  goBackToTop() {
-    wx.navigateTo({
-      url: '/pages/backToTop/backToTop',
-    })
-  },
-
-  goLoading() {
-    wx.navigateTo({
-      url: '/pages/loading/loading',
-    })
-  },
-
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-    setTabBar.call(this, 0)
+
   },
 
   /**
@@ -69,7 +26,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow() {
-    
+
   },
 
   /**

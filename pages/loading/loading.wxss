@@ -1,0 +1,26 @@
+/* pages/loading/loading.wxss */
+.container {
+  padding: 40rpx;
+}
+
+.title {
+  font-size: 40rpx;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 60rpx;
+  display: block;
+}
+
+.demo-section {
+  margin-bottom: 60rpx;
+  padding: 30rpx;
+  background: #f9f9f9;
+  border-radius: 16rpx;
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  margin-bottom: 30rpx;
+  display: block;
+}

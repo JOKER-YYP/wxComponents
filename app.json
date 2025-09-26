@@ -12,7 +12,8 @@
     "pages/navbar/navbar",
     "pages/cardPage/cardPage",
     "pages/aiChat/aiChat",
-    "pages/backToTop/backToTop"
+    "pages/backToTop/backToTop",
+    "pages/loading/loading"
   ],
   "usingComponents": {
     "y-calendar": "/components/y-calendar/y-calendar",
@@ -20,7 +21,8 @@
     "y-lazy-img": "/components/y-lazy-img/y-lazy-img",
     "y-fab": "/components/y-fab/y-fab",
     "y-navbar": "/components/y-navbar/y-navbar",
-    "y-back-to-top": "/components/y-back-to-top/y-back-to-top"
+    "y-back-to-top": "/components/y-back-to-top/y-back-to-top",
+    "y-loading": "/components/y-loading/y-loading"
   },
   "window": {
     "navigationBarTextStyle": "black",

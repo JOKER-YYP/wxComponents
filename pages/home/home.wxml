@@ -1,9 +1,8 @@
 <!--pages/home/hoem.wxml-->
-
 <button bindtap="goCalendar">日历组件</button>
 <button bindtap="goTabs">Tabs组件</button>
 <button bindtap="goWatch">Watch方法</button>
 <button bindtap="goFab">悬浮按钮</button>
 <button bindtap="goNavbar">导航栏</button>
-
 <button bindtap="goBackToTop">返回顶部</button>
+<button bindtap="goLoading">加载</button>

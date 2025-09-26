@@ -1,0 +1,38 @@
+<!--components/y-loading/y-loading.wxml-->
+<view class="loading-container">
+  <!-- 纯图标模式 -->
+  <view wx:if="{{type === 'icon'}}" class="loading-icon">
+    <image 
+      src="{{iconPath}}" 
+      class="rotating" 
+      style="width: {{size}}rpx; height: {{size}}rpx;"
+    />
+  </view>
+
+  <!-- 三个点加载模式 -->
+  <view wx:elif="{{type === 'dot'}}" class="dot-loading">
+    <view class="dot" style="animation-delay: 0s;"></view>
+    <view class="dot" style="animation-delay: 0.2s;"></view>
+    <view class="dot" style="animation-delay: 0.4s;"></view>
+  </view>
+
+  <!-- 图标+文字横向模式 -->
+  <view wx:elif="{{type === 'horizontal'}}" class="horizontal">
+    <image 
+      src="{{iconPath}}" 
+      class="rotating" 
+      style="width: {{size}}rpx; height: {{size}}rpx;"
+    />
+    <text class="loading-text">{{text}}</text>
+  </view>
+
+  <!-- 图标+文字竖向模式 -->
+  <view wx:elif="{{type === 'vertical'}}" class="vertical">
+    <image 
+      src="{{iconPath}}" 
+      class="rotating" 
+      style="width: {{size}}rpx; height: {{size}}rpx;"
+    />
+    <text class="loading-text" style="margin-top: 12rpx;">{{text}}</text>
+  </view>
+</view>

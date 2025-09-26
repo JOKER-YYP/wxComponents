@@ -1,0 +1,33 @@
+<!--pages/loading/loading.wxml-->
+<view class="container">
+  <text class="title">Loading组件演示</text>
+  
+  <view class="demo-section">
+    <text class="section-title">1. 纯图标模式</text>
+    <y-loading type="icon" size="80" />
+  </view>
+  
+  <view class="demo-section">
+    <text class="section-title">2. 三个点模式</text>
+    <y-loading type="dot" />
+  </view>
+  
+  <view class="demo-section">
+    <text class="section-title">3. 图标+文字横向</text>
+    <y-loading type="horizontal" text="正在加载数据..." />
+  </view>
+  
+  <view class="demo-section">
+    <text class="section-title">4. 图标+文字竖向</text>
+    <y-loading type="vertical" text="处理中..." size="60" />
+  </view>
+  
+  <view class="demo-section">
+    <text class="section-title">5. 自定义图标</text>
+    <y-loading 
+      type="horizontal" 
+      text="自定义图标" 
+      iconPath="/assets/loading2.png" 
+    />
+  </view>
+</view>
