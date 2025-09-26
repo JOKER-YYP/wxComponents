@@ -1,0 +1,10 @@
+<!--components/y-lazy-img/y-lazy-img.wxml-->
+<view class="lazy-image" style="padding-bottom: {{aspectRatio}}; {{sty}}">
+  <image 
+    class="img"
+    src="{{showImage && !loadFailed ? imageUrl : (loadFailed ? errorPlaceholder : placeholder)}}"
+    mode="aspectFill"
+    bindload="handleImageLoad"
+    binderror="handleImageError"
+  ></image>
+</view>

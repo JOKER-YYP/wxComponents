@@ -1,0 +1,48 @@
+/* pages/fab/fab.wxss */
+.container {
+  padding: 20rpx;
+  min-height: 100vh;
+  background-color: #f5f5f5;
+}
+
+.title {
+  display: block;
+  font-size: 40rpx;
+  font-weight: bold;
+  text-align: center;
+  margin: 40rpx 0;
+}
+
+.subtitle {
+  display: block;
+  font-size: 28rpx;
+  color: #666;
+  text-align: center;
+  margin-bottom: 60rpx;
+}
+
+.button-group {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20rpx;
+  margin-bottom: 40rpx;
+}
+
+.type-btn {
+  width: 200rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  font-size: 26rpx;
+  background-color: #fff;
+  border-radius: 8rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0,0,0,0.1);
+}
+
+.current-type {
+  text-align: center;
+  font-size: 30rpx;
+  color: #1677ff;
+  margin: 30rpx 0;
+  font-weight: bold;
+}

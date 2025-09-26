@@ -1,0 +1,46 @@
+<!-- components/y-calendar/y-calendar.wxml -->
+<view class="calendar-container">
+    <!-- 日历头部 -->
+    <view class="calendar-header">
+        <view class="nav-button" bindtap="onPrevMonth">
+          <view class="left-arrow"></view>
+        </view>
+        <view class="calendar-title">{{year}}年{{month + 1}}月</view>
+        <view class="nav-button" bindtap="onNextMonth">
+          <view class="right-arrow"></view>
+        </view>
+    </view>
+    
+    <!-- 星期栏 -->
+    <view class="weekdays">
+        <view class="weekday">日</view>
+        <view class="weekday">一</view>
+        <view class="weekday">二</view>
+        <view class="weekday">三</view>
+        <view class="weekday">四</view>
+        <view class="weekday">五</view>
+        <view class="weekday">六</view>
+    </view>
+    
+    <!-- 日期网格 -->
+    <view class="days-grid">
+        <view 
+            wx:for="{{days}}" 
+            wx:key="index" 
+            class="day {{item.className}}" 
+            bindtap="onSelectDate" 
+            data-timestamp="{{item.timestamp}}"
+            data-disabled="{{item.disabled}}"
+        >
+            <text>{{item.text}}</text>
+            <view wx:if="{{item.mark}}" class="mark"></view>
+            <view wx:if="{{item.rangeLabel}}" class="range-label">{{item.rangeLabel}}</view>
+        </view>
+    </view>
+    
+    <!-- 底部按钮 -->
+    <view class="calendar-footer">
+        <view class="calendar-button button-reset" bindtap="onReset">重置</view>
+        <view class="calendar-button button-confirm" bindtap="onConfirm">确认</view>
+    </view>
+</view>

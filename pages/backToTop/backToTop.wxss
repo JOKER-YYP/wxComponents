@@ -1,0 +1,22 @@
+/* pages/backToTop/backToTop.wxss */
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.content {
+  padding: 20rpx;
+}
+
+.item {
+  height: 300rpx;
+  margin: 30rpx;
+  background: #f8f8f8;
+  border-radius: 16rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 32rpx;
+  box-shadow: 0 4rpx 12rpx rgba(0,0,0,0.05);
+}

@@ -1,0 +1,55 @@
+<!--pages/calendar/calendar.wxml-->
+<view class="container">
+  <view class="mode-selector">
+    <view 
+      class="mode-button {{mode === 'single' ? 'active' : ''}}" 
+      bindtap="changeMode" 
+      data-mode="single"
+    >
+      单选模式
+    </view>
+    <view 
+      class="mode-button {{mode === 'multiple' ? 'active' : ''}}" 
+      bindtap="changeMode" 
+      data-mode="multiple"
+    >
+      多选模式
+    </view>
+    <view 
+      class="mode-button {{mode === 'range' ? 'active' : ''}}" 
+      bindtap="changeMode" 
+      data-mode="range"
+    >
+      范围模式
+    </view>
+  </view>
+  
+  <view class="settings">
+    <view class="setting-item">
+      <text class="setting-label">禁用过去日期:</text>
+      <switch checked="{{disablePast}}" bindchange="toggleDisablePast" />
+    </view>
+    <view class="setting-item">
+      <text class="setting-label">最大选择数量:</text>
+      <input type="number" value="{{maxSelection}}" bindinput="changeMaxSelection" class="max-input" />
+    </view>
+  </view>
+  
+  <view class="calendar-wrapper">
+    <y-calendar 
+      id="calendar"
+      mode="{{mode}}" 
+      markedDates="{{markedDates}}"
+      maxSelection="{{maxSelection}}"
+      disablePast="{{disablePast}}"
+      bindselect="onSelect"
+      bindconfirm="onConfirm"
+      bindreset="onReset"
+    />
+  </view>
+  
+  <view class="result-panel">
+    <text class="result-title">选择结果</text>
+    <text class="result-content">{{resultText}}</text>
+  </view>
+</view>

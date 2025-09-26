@@ -1,0 +1,310 @@
+<!--pages/addForm/addForm.wxml-->
+<wxs src="./addForm.wxs" module="dataTrans"></wxs>
+<view class="container">
+  <view class="form-preview">
+    <input class="form-title-input" placeholder="请输入表单标题..." value="{{formTitle}}" bindinput="onTitleInput" disabled="{{isPreviewMode}}" />
+    
+    <view class="form-container" id="formContainer">
+      <view wx:if="{{fields.length === 0}}" class="empty-state">
+        <icon type="warn" size="30" color="#bdc3c7"></icon>
+        <text class="h3">表单为空</text>
+        <text>点击下方按钮添加第一个组件</text>
+      </view>
+      
+      <view wx:for="{{fields}}" wx:for-item="field" wx:for-index="index" wx:key="id" 
+            class="form-field {{field.dragging ? 'dragging' : ''}} {{field.dragOver ? 'drag-over' : ''}} {{isPreviewMode ? 'form-preview-mode' : ''}}" 
+            data-type="{{field.type}}" data-index="{{index}}" data-id="{{field.id}}"
+            hidden="{{isPreviewMode && !field.isVisible}}"
+            bindtouchstart="onTouchStart" bindtouchmove="onTouchMove" bindtouchend="onTouchEnd"
+            bindtouchcancel="onTouchCancel">
+        <view class="field-header">
+          <text class="field-label">
+            <text>{{field.required ? ' *' : ''}}{{field.label}}</text>
+            <block wx:if="{{field.conditions && field.conditions.length > 0}}">
+              <text class="condition-badge">条件显示</text>
+            </block>
+          </text>
+          <view class="field-actions" wx:if="{{!isPreviewMode}}">
+            <view class="action-btn" bindtap="editField" data-index="{{index}}">
+              <image class="setting" src="../../assets/edit.png" mode=""/>
+            </view>
+            <view class="action-btn" bindtap="deleteField" data-index="{{index}}">
+              <icon type="clear" size="24" color="#7f8c8d"></icon>
+            </view>
+          </view>
+        </view>
+        
+        <view class="field-preview">
+          <!-- 文本输入 -->
+          <input wx:if="{{field.type === 'text'}}" class="preview-input" placeholder="{{field.placeholder || '请输入' + field.label}}" value="{{formValues[field.id]}}" bindinput="onFieldInput" data-id="{{field.id}}" disabled="{{!isPreviewMode}}" />
+          
+          <!-- 多行文本 -->
+          <textarea wx:if="{{field.type === 'textarea'}}" class="preview-input" placeholder="{{field.placeholder || '请输入' + field.label}}" value="{{formValues[field.id]}}" bindinput="onFieldInput" data-id="{{field.id}}" disabled="{{!isPreviewMode}}" rows="3" />
+          
+          <!-- 单选按钮 -->
+          <radio-group wx:if="{{field.type === 'radio'}}" bindchange="onFieldChange" data-id="{{field.id}}">
+            <label wx:for="{{field.options}}" wx:for-item="option" wx:key="index" class="radio-item">
+              <radio value="{{option}}" checked="{{formValues[field.id] === option}}" disabled="{{!isPreviewMode}}"></radio>
+              <text>{{option}}</text>
+            </label>
+          </radio-group>
+          
+          <!-- 多选按钮 -->
+          <checkbox-group wx:if="{{field.type === 'checkbox'}}" bindchange="onCheckboxChange" data-id="{{field.id}}">
+            <label wx:for="{{field.options}}" wx:for-item="option" wx:key="index" class="checkbox-item">
+              <checkbox value="{{option}}" checked="{{formValues[field.id] && dataTrans.getCheckbox(formValues[field.id], option)}}" disabled="{{!isPreviewMode}}"></checkbox>
+              <text>{{option}}</text>
+            </label>
+          </checkbox-group>
+          
+          <!-- 日期选择 -->
+          <picker wx:if="{{field.type === 'date'}}" mode="date" value="{{formValues[field.id]}}" bindchange="onDateChange" data-id="{{field.id}}" disabled="{{!isPreviewMode}}">
+            <view class="date-picker">
+              <icon type="clear" size="14" color="#7f8c8d"></icon>
+              <text>{{formValues[field.id] || '选择日期'}}</text>
+            </view>
+          </picker>
+          
+          <!-- 文件上传 -->
+          <view wx:if="{{field.type === 'file'}}" class="file-upload" bindtap="onFileUpload" data-index="{{index}}">
+            <icon type="upload" size="30" color="#1677ff"></icon>
+            <text>点击上传文件</text>
+          </view>
+        </view>
+        
+        <!-- 拖拽放置指示器 -->
+        <view class="drop-indicator {{field.showDropIndicator ? 'active' : ''}}"></view>
+      </view>
+    </view>
+    <view class="add-component-btn" bindtap="showComponentModal" wx:if="{{!isPreviewMode}}">添加组件</view>
+  </view>
+  
+  <view class="actions-footer">
+    <view class="btn btn-secondary" bindtap="saveForm">保存</view>
+    <view class="btn btn-primary" bindtap="togglePreviewMode">{{isPreviewMode ? '编辑' : '预览'}}</view>
+    <view class="btn btn-primary" bindtap="publishForm">发布</view>
+  </view>
+  
+  <!-- 组件选择弹窗 -->
+  <view class="modal" wx:if="{{showComponentModal}}">
+    <view class="modal-content">
+      <view class="modal-header">
+        <text class="modal-title">选择组件类型</text>
+        <view class="modal-close" bindtap="hideComponentModal">×</view>
+      </view>
+      <view class="modal-body">
+        <view class="component-type-selector">
+          <view class="component-type" data-type="text" bindtap="selectComponentType">
+            <icon type="info" size="24" color="#1677ff"></icon>
+            <text>单行文本</text>
+          </view>
+          <view class="component-type" data-type="textarea" bindtap="selectComponentType">
+            <icon type="info" size="24" color="#1677ff"></icon>
+            <text>多行文本</text>
+          </view>
+          <view class="component-type" data-type="radio" bindtap="selectComponentType">
+            <icon type="info" size="24" color="#1677ff"></icon>
+            <text>单选按钮</text>
+          </view>
+          <view class="component-type" data-type="checkbox" bindtap="selectComponentType">
+            <icon type="info" size="24" color="#1677ff"></icon>
+            <text>多选按钮</text>
+          </view>
+          <view class="component-type" data-type="date" bindtap="selectComponentType">
+            <icon type="info" size="24" color="#1677ff"></icon>
+            <text>日期选择</text>
+          </view>
+          <view class="component-type" data-type="file" bindtap="selectComponentType">
+            <icon type="info" size="24" color="#1677ff"></icon>
+            <text>文件上传</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  
+  <!-- 属性设置弹窗 -->
+  <view class="modal" wx:if="{{showPropertyModal}}">
+    <view class="modal-content">
+      <view class="modal-header">
+        <text class="modal-title">设置组件属性</text>
+        <view class="modal-close" bindtap="hidePropertyModal">×</view>
+      </view>
+      <view class="modal-body">
+        <view class="form-group">
+          <label for="propLabel">字段标签</label>
+          <input type="text" id="propLabel" placeholder="例如：姓名、年龄等" value="{{currentField.label}}" bindinput="onLabelInput" />
+        </view>
+        
+        <view class="form-group" wx:if="{{currentField.type === 'text' || currentField.type === 'textarea'}}">
+          <label for="propPlaceholder">占位符文本</label>
+          <input type="text" id="propPlaceholder" placeholder="输入框提示文本" value="{{currentField.placeholder}}" bindinput="onPlaceholderInput" />
+        </view>
+        
+        <view class="switch-container">
+          <label for="propRequired">是否必填</label>
+          <switch id="propRequired" checked="{{currentField.required}}" bindchange="onRequiredChange" />
+        </view>
+        
+        <view wx:if="{{currentField.type === 'radio' || currentField.type === 'checkbox'}}">
+          <view class="form-group">
+            <label>选项列表</label>
+            <view class="options-list">
+              <view wx:for="{{currentField.options}}" wx:for-item="option" wx:for-index="optIndex" wx:key="optIndex" class="option-item">
+                <input type="text" class="option-input" value="{{option}}" placeholder="选项文本" data-index="{{optIndex}}" bindinput="onOptionInput" />
+                <view class="action-btn" bindtap="removeOption" data-index="{{optIndex}}" wx:if="{{currentField.options.length > 1}}">
+                  <icon type="clear" size="30" color="#7f8c8d"></icon>
+                </view>
+              </view>
+            </view>
+            <view class="add-option" bindtap="addOption">
+              <icon type="add" size="12" color="#1677ff"></icon>
+              <text>添加选项</text>
+            </view>
+          </view>
+        </view>
+        
+        <view wx:if="{{currentField.type === 'file'}}">
+          <view class="form-group">
+            <label for="fileType">文件类型</label>
+            <picker id="fileType" value="{{currentField.fileTypeIndex}}" range="{{fileTypes}}" bindchange="onFileTypeChange">
+              <view class="picker">{{currentField.fileType}}</view>
+            </picker>
+          </view>
+          
+          <view class="switch-container">
+            <label for="multipleFiles">允许多文件上传</label>
+            <switch id="multipleFiles" checked="{{currentField.multiple}}" bindchange="onMultipleChange" />
+          </view>
+        </view>
+        
+        <!-- 条件逻辑设置 -->
+        <view class="condition-container">
+          <view class="condition-header">
+            <text class="condition-title">题目显示逻辑</text>
+          </view>
+          <view class="conditions-list">
+            <view wx:if="{{currentField.conditions && currentField.conditions.length === 0}}">
+              <text style="color: #7f8c8d; text-align: center; padding: 24rpx 0;">暂无条件</text>
+            </view>
+            <view wx:for="{{currentField.conditions}}" wx:for-item="condition" wx:for-index="condIndex" wx:key="condIndex" class="condition-item">
+              <view class="condition-header">
+                <text class="condition-title">条件 {{condIndex + 1}}</text>
+                <view class="remove-condition" bindtap="removeCondition" data-index="{{condIndex}}">
+                  <icon type="clear" size="14" color="#7f8c8d"></icon>
+                </view>
+              </view>
+              <view class="condition-content">
+                <view class="condition-field">
+                  <label>关联问题</label>
+                  <text>{{dataTrans.getFieldLabel(fields, condition.fieldId)}}</text>
+                </view>
+                <view class="condition-field">
+                  <label>条件</label>
+                  <text>{{dataTrans.getOperatorText(condition.operator)}}</text>
+                </view>
+                <view class="condition-field">
+                  <label>值</label>
+                  <text>{{condition.value || ''}}</text>
+                </view>
+              </view>
+            </view>
+          </view>
+          <view class="add-condition-btn" bindtap="addCondition">添加条件</view>
+        </view>
+      </view>
+      <view class="modal-footer">
+        <view class="btn btn-secondary" bindtap="hidePropertyModal">取消</view>
+        <view class="btn btn-primary" bindtap="saveProperties">确认</view>
+      </view>
+    </view>
+  </view>
+  
+  <!-- 条件设置弹窗 -->
+  <view class="modal" wx:if="{{showConditionModal}}">
+    <view class="modal-content">
+      <view class="modal-header">
+        <text class="modal-title">设置显示条件</text>
+        <view class="modal-close" bindtap="hideConditionModal">×</view>
+      </view>
+      <view class="modal-body">
+        <view class="form-group">
+          <label for="conditionField">关联问题</label>
+          <picker id="conditionField" value="{{conditionFieldIndex}}" range="{{availableFields}}" range-key="label" bindchange="onConditionFieldChange">
+            <view class="picker">{{selectedConditionField ? selectedConditionField.label : '请选择问题'}}</view>
+          </picker>
+        </view>
+        
+        <view class="form-group">
+          <label for="conditionOperator">条件</label>
+          <picker id="conditionOperator" value="{{conditionOperatorIndex}}" range="{{operators}}" range-key="text" bindchange="onConditionOperatorChange">
+            <view class="picker">{{selectedOperator ? selectedOperator.text : '请选择条件'}}</view>
+          </picker>
+        </view>
+        
+        <view class="form-group" wx:if="{{showConditionValue}}">
+          <label for="conditionValue">值</label>
+          <view class="condition-value-container">
+            <!-- 文本输入 -->
+            <input wx:if="{{conditionValueType === 'text'}}" type="text" id="conditionValue" placeholder="请输入条件值" value="{{conditionValue}}" bindinput="onConditionValueInput" />
+            
+            <!-- 日期选择 -->
+            <picker wx:if="{{conditionValueType === 'date'}}" mode="date" value="{{conditionValue}}" bindchange="onDateConditionChange">
+              <view class="date-picker">
+                <text>{{conditionValue || '选择日期'}}</text>
+              </view>
+            </picker>
+            
+            <!-- 选项选择 -->
+            <view wx:if="{{conditionValueType === 'option'}}">
+              <view class="selected-option" bindtap="showOptionSelector">
+                <text>{{selectedOptionText || (isMultiSelect ? '点击选择选项' : '未选择任何选项')}}</text>
+              </view>
+              <view class="multi-select-info" wx:if="{{isMultiSelect}}">可多选，已选 {{selectedOptions.length}} 个选项</view>
+            </view>
+          </view>
+        </view>
+        
+        <!-- 选项选择器 -->
+        <view class="option-selector" wx:if="{{showOptionSelector}}">
+          <view class="option-search">
+            <input type="text" placeholder="查找选项" value="{{optionSearch}}" bindinput="onOptionSearch" />
+          </view>
+          <scroll-view class="option-list" scroll-y>
+            <view wx:for="{{filteredOptions}}" wx:key="index" class="option-list-item {{isOptionSelected(item) ? 'selected' : ''}}" bindtap="toggleOption" data-option="{{item}}">
+              <text>{{item}}</text>
+            </view>
+          </scroll-view>
+        </view>
+        
+        <!-- 已选选项 -->
+        <view class="selected-options" wx:if="{{selectedOptions.length > 0}}">
+          <view wx:for="{{selectedOptions}}" wx:key="index" class="selected-option-tag">
+            <text>{{item}}</text>
+            <text class="remove" bindtap="removeSelectedOption" data-option="{{item}}">×</text>
+          </view>
+        </view>
+      </view>
+      <view class="modal-footer">
+        <view class="btn btn-secondary" bindtap="hideConditionModal">取消</view>
+        <view class="btn btn-primary" bindtap="saveCondition">确定</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 删除确认弹窗 -->
+  <view class="modal" wx:if="{{showDeleteConfirm}}">
+    <view class="modal-content">
+      <view class="modal-header">
+        <text class="modal-title">删除确认</text>
+      </view>
+      <view class="modal-body">
+        <text>该问题存在{{dependentFieldsCount}}个关联问题，删除后将一并删除这些关联问题，是否确认删除？</text>
+      </view>
+      <view class="modal-footer">
+        <view class="btn btn-secondary" bindtap="cancelDelete">取消</view>
+        <view class="btn btn-primary" bindtap="confirmDelete">确认删除</view>
+      </view>
+    </view>
+  </view>
+</view>

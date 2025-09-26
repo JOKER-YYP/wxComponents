@@ -1,0 +1,41 @@
+/* components/y-back-to-top/y-back-to-top.wxss */
+.back-to-top {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  bottom: 250rpx;
+  right: 40rpx;
+  height: 100rpx;
+  width: 100rpx;
+  background: rgba(255, 255, 253, 0.8);
+  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(15px);
+  z-index: 999;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.3s ease;
+}
+
+.border {
+  border: 1rpx solid #dcdcdc;
+  box-shadow: none;
+}
+
+.circle {
+  border-radius: 50%;
+}
+
+.square {
+  border-radius: 16rpx;
+}
+
+.back-to-top.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.back-to-top .icon {
+  height: 45rpx;
+  width: 36rpx;
+}

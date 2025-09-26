@@ -1,0 +1,25 @@
+module.exports = {
+  getFieldLabel: function (fields, fieldId) {
+    for (var i = 0; i < fields.length; i++) {
+      if (fields[i].id === fieldId) {
+        return fields[i].label ? fields[i].label : "未知问题";
+      }
+    }
+    return "未知问题";
+  },
+  getOperatorText: function (operator) {
+    var operators = {
+      'equals': '等于',
+      'notEquals': '不等于',
+      'contains': '包含',
+      'notContains': '不包含',
+      'empty': '为空',
+      'notEmpty': '不为空'
+    };
+    
+    return operators[operator] || operator;
+  },
+  getCheckbox: function (id, option) {
+    return id.indexOf(option) !== -1;
+  },
+}

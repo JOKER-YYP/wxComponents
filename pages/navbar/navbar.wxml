@@ -1,0 +1,109 @@
+<!--pages/navbar/navbar.wxml-->
+<view class="container" style="margin-top: {{tabHeight}}rpx;">
+  <!-- 导航栏组件 -->
+  <y-navbar 
+    id="navbar"
+    title="{{navbarTitle}}" 
+    border="{{border}}" 
+    background="{{background}}" 
+    titleAlign="{{titleAlign}}"
+    leftButtons="{{leftButtons}}"
+    bind:leftbuttonclick="onLeftButtonClick"
+  />
+  
+  <view class="content">
+    <view class="control-group">
+      <text class="group-title">标题对齐方式</text>
+      <view class="button-group">
+        <button 
+          class="button {{titleAlign === 'center' ? 'active' : ''}}" 
+          bindtap="setTitleAlign" 
+          data-align="center"
+        >
+          居中
+        </button>
+        <button 
+          class="button {{titleAlign === 'left' ? 'active' : ''}}" 
+          bindtap="setTitleAlign" 
+          data-align="left"
+        >
+          左对齐
+        </button>
+      </view>
+    </view>
+    
+    <view class="control-group">
+      <text class="group-title">左侧按钮配置</text>
+      <view class="button-group">
+        <button 
+          class="button {{leftButtons.length === 0 ? 'active' : ''}}" 
+          bindtap="setLeftButtons" 
+          data-type="default"
+        >
+          默认返回
+        </button>
+        <button 
+          class="button {{leftButtons.length === 1 ? 'active' : ''}}" 
+          bindtap="setLeftButtons" 
+          data-type="single"
+        >
+          单个按钮
+        </button>
+        <button 
+          class="button {{leftButtons.length === 2 ? 'active' : ''}}" 
+          bindtap="setLeftButtons" 
+          data-type="multiple"
+        >
+          多个按钮
+        </button>
+      </view>
+    </view>
+    
+    <view class="control-group">
+      <text class="group-title">按钮是否有边框</text>
+      <view class="button-group">
+        <button 
+          class="button {{border === 'undefined' ? 'active' : ''}}" 
+          bindtap="setBorder" 
+          data-type="default"
+        >
+          默认边框
+        </button>
+        <button 
+          class="button {{border === 'none' ? 'active' : ''}}" 
+          bindtap="setBorder" 
+          data-type="none"
+        >
+          无边框
+        </button>
+        <button 
+          class="button {{border !== 'undefined' && border !== 'none' ? 'active' : ''}}" 
+          bindtap="setBorder" 
+          data-type="custom"
+        >
+          自定义边框
+        </button>
+      </view>
+    </view>
+
+    <view class="control-group">
+      <text class="group-title">导航栏背景色</text>
+      <view class="button-group">
+        <button 
+          class="button {{background === 'undefined' ? 'active' : ''}}" 
+          bindtap="setBackground" 
+          data-type="default"
+        >
+          默认背景色
+        </button>
+        <button 
+          class="button {{background !== 'undefined' ? 'active' : ''}}" 
+          bindtap="setBackground" 
+          data-type="custom"
+        >
+          自定义背景色
+        </button>
+      </view>
+    </view>
+  </view>
+</view>

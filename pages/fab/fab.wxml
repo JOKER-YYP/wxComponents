@@ -1,0 +1,28 @@
+<!--pages/fab/fab.wxml-->
+<view class="container">
+  <text class="title">悬浮按钮演示</text>
+  <text class="subtitle">点击下方按钮切换悬浮按钮类型</text>
+  
+  <view class="current-type">当前类型: {{currentTypeName}}</view>
+  
+  <view class="button-group">
+    <button class="type-btn" bindtap="switchType" data-type="basic">基础悬浮按钮</button>
+    <button class="type-btn" bindtap="switchType" data-type="text">带文字按钮</button>
+    <button class="type-btn" bindtap="switchType" data-type="vertical">垂直拖动按钮</button>
+    <button class="type-btn" bindtap="switchType" data-type="free">自由拖动按钮</button>
+    <button class="type-btn" bindtap="switchType" data-type="custom">自定义样式按钮</button>
+  </view>
+  
+  <y-fab 
+    id="mainFab"
+    icon="{{fabConfig.icon}}"
+    text="{{fabConfig.text}}"
+    draggable="{{fabConfig.draggable}}"
+    y-bounds="{{fabConfig.yBounds}}"
+    style="{{fabConfig.style}}"
+    custom-style="{{fabConfig.customStyle}}"
+    bindtap="onFabClick"
+    bind:drag-start="onDragStart"
+    bind:drag-end="onDragEnd"
+  />
+</view>

@@ -1,0 +1,24 @@
+<!--pages/tabs/tabs.wxml-->
+<view class="container">
+  <view class="header">
+    <text class="title">选项卡组件演示</text>
+  </view>
+  <y-tabs leftc="s" title="报名表" background="linear-gradient(137deg, rgba(194, 231, 107, 1) 0%, rgba(147, 213, 0, 1) 100%)" border="none" btnBgc="rgba(255, 255, 255, 0)" />
+  
+  <view class="section">
+    <text class="section-title">基础用法</text>
+    <y-tabs 
+      leftc="1l"
+      background="{{bgc}}" 
+      modelValue="{{activeTab}}" 
+      dataSource="{{tabs}}"
+      bind:change="onTabChange"
+      bind:update:modelValue="onModelValueUpdate"
+    />
+  </view>
+  
+  <view class="content">
+    <text class="content-title">当前选中:</text>
+    <text class="content-value">选项卡{{activeTab + 1}}</text>
+  </view>
+</view>

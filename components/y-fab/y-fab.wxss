@@ -1,0 +1,48 @@
+/* components/y-fab/y-fab.wxss */
+.fab-container {
+  position: fixed;
+  z-index: 9999;
+  transition: transform 0.2s ease;
+}
+
+.fab-button {
+  display: flex;
+  /* flex-direction: column; */
+  align-items: center;
+  justify-content: center;
+  width: 100rpx;
+  height: 100rpx;
+  /* padding: 30rpx; */
+  border-radius: 50%;
+  background-color: #1677ff;
+  box-shadow: 0 6rpx 18rpx rgba(0, 0, 0, 0.15);
+  transition: all 0.2s;
+  transform: translate3d(0, 0, 0);
+}
+
+.icon-text {
+  width: 200rpx;
+  border-radius: 50rpx;
+}
+
+.long-btn {
+  margin-left: 12rpx;
+}
+
+.fab-dragging {
+  opacity: 0.9;
+  transform: scale(0.95) translate3d(0, 0, 0);
+}
+
+.fab-icon {
+  width: 48rpx;
+  height: 48rpx;
+  color: white;
+}
+
+.fab-text {
+  font-size: 28rpx;
+  color: white;
+  line-height: 14px;
+  text-align: center;
+}

@@ -1,0 +1,7 @@
+<!--components/y-back-to-top/y-back-to-top.wxml-->
+<!-- <view class="back-to-top" bindtap="handleReturnTop" hidden="{{!show}}">
+  <image src="/assets/top.png" class="icon" />
+</view> -->
+<view class="back-to-top {{show ? 'show' : ''}} {{shape == 'circle' ? 'circle' : 'square'}} {{border ? 'border' : ''}}" bindtap="handleReturnTop">
+  <image src="/assets/top.png" class="icon" />
+</view>

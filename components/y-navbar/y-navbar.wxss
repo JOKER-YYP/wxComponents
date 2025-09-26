@@ -1,0 +1,49 @@
+/* components/y-navbar/y-navbar.wxss */
+/* 无标题导航栏样式 */
+.nav {
+  position: fixed;
+  top: 40px;
+  z-index: 2000;
+  width: 100%;
+}
+
+/* 按钮样式 */
+.btn {
+  background-color: rgba(255,255,255,0.7);
+  border-radius: 100px;
+  text-align: center;
+  border: solid 1rpx #d1d6c8;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 带标题导航栏样式 */
+.likeold {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: #fff;
+  z-index: 2000;
+  /* box-shadow: 0 2rpx 10rpx rgba(0,0,0,0.1); */
+}
+
+/* 标题样式 */
+.title {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  color: #333333;
+}
+
+/* 按钮容器 */
+.left-container {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  z-index: 2001;
+  left: 0;
+}

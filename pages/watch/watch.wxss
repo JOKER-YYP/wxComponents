@@ -1,0 +1,36 @@
+/* pages/watch/watch.wxss */
+.container {
+  padding: 20rpx;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.card {
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 32rpx;
+  margin-bottom: 32rpx;
+}
+
+.title {
+  font-size: 36rpx;
+  font-weight: bold;
+  margin-bottom: 32rpx;
+  display: block;
+  text-align: center;
+}
+
+.section {
+  margin-bottom: 40rpx;
+  padding-bottom: 24rpx;
+  border-bottom: 1rpx solid #eee;
+}
+
+.btn {
+  margin-top: 20rpx;
+  background: #1677ff;
+  color: white;
+  border-radius: 8rpx;
+  font-size: 28rpx;
+}

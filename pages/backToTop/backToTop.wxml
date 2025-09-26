@@ -1,0 +1,10 @@
+<!--pages/backToTop/backToTop.wxml-->
+<view class="container">
+  <view class="content">
+    <view wx:for="{{list}}" wx:key="index" class="item">
+      <text>内容区块 {{index + 1}}</text>
+    </view>
+  </view>
+  
+  <y-back-to-top id="backToTop" threshold="800" shape="square" border bind:returntop="onReturnTop" />
+</view>

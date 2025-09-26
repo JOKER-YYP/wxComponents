@@ -1,0 +1,20 @@
+<!-- components/y-fab/y-fab.wxml -->
+<view 
+  class="fab-container"
+  style="{{positionStyle}}"
+  catch:touchstart="onTouchStart"
+  catch:touchmove="onTouchMove"
+  catch:touchend="onTouchEnd"
+>
+  <view 
+    class="fab-button {{dragging ? 'fab-dragging' : ''}} {{(icon && text) ? 'icon-text' : ''}}"
+		style="{{customStyle}};{{style}}"
+    bind:tap="onTap"
+  >
+    <block wx:if="{{icon}}">
+      <image wx:if="{{iconType === 'image'}}" src="{{icon}}" class="fab-icon" mode="aspectFit"></image>
+      <icon wx:else class="fab-icon {{icon}}" size="24" />
+    </block>
+    <text wx:if="{{text}}" class="fab-text {{icon ? 'long-btn' : ''}}">{{text}}</text>
+  </view>
+</view>

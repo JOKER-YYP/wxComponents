@@ -1,0 +1,99 @@
+<!-- components/y-navbar/y-navbar.wxml -->
+<!-- 无标题导航栏 -->
+<view wx:if="{{!title}}" class="nav" style="background: {{background}};">
+  <!-- 左侧按钮容器 -->
+  <view class="left-container" style="left:{{left}}px; top:{{top}}px;">
+    <!-- 默认返回按钮 -->
+    <view 
+      wx:if="{{leftc && !leftButtons.length}}"
+      class="btn"
+      style="height:{{height}}px;width:{{height}}px;background-color: {{btnBgc}};border:{{border}};"
+      bindtap="backar"
+    >
+      <image 
+        src="/assets/back.png"  
+        style="width: {{leftarwidth*0.7}}px; height: {{imgheight*0.7}}px;" 
+        mode="aspectFill" 
+        alt="返回"
+      />
+    </view>
+    
+    <!-- 自定义左侧按钮 -->
+    <block wx:if="{{leftButtons.length}}">
+      <view 
+        wx:for="{{leftButtons}}"
+        wx:key="index"
+        class="btn"
+        style="height:{{height}}px;width:{{height}}px;margin-right: 10rpx;background-color: {{btnBgc}};border:{{border}};"
+        bindtap="onLeftButtonClick"
+        data-index="{{index}}"
+      >
+        <image 
+          wx:if="{{item.icon}}" 
+          src="{{item.icon}}"  
+          style="width: {{leftarwidth*0.7}}px; height: {{imgheight*0.7}}px;" 
+          mode="aspectFill" 
+          alt="{{item.text || '按钮'}}"
+        />
+        <text wx:if="{{item.text}}" style="font-size: 28rpx;">{{item.text}}</text>
+      </view>
+    </block>
+  </view>
+</view> 
+
+<!-- 带标题导航栏 -->
+<view 
+  wx:if="{{title}}" 
+  class="likeold" 
+  style="height:{{navbarheight}}px;background: {{background}};"
+>
+  <!-- 左侧按钮容器 -->
+  <view class="left-container" style="left:{{left}}px; top:{{top}}px;">
+    <!-- 默认返回按钮 -->
+    <view 
+      wx:if="{{leftc && !leftButtons.length}}"
+      class="btn"
+      style="height:{{height}}px;width:{{height}}px;background-color: {{btnBgc}};border:{{border}};"
+      bindtap="backar"
+    >
+      <image 
+        src="/assets/back.png"  
+        style="width: {{leftarwidth*0.7}}px; height: {{imgheight*0.7}}px;"  
+        mode="aspectFill" 
+        alt="返回"
+      />
+    </view>
+    
+    <!-- 自定义左侧按钮 -->
+    <block wx:if="{{leftButtons.length}}">
+      <view 
+        wx:for="{{leftButtons}}"
+        wx:key="index"
+        class="btn"
+        style="height:{{height}}px;width:{{height}}px;margin-right: 10rpx;background-color: {{btnBgc}};border:{{border}};"
+        bindtap="onLeftButtonClick"
+        data-index="{{index}}"
+      >
+        <image 
+          wx:if="{{item.icon}}" 
+          src="{{item.icon}}"  
+          style="width: {{item.width || leftarwidth*0.7}}px; height: {{item.height || imgheight*0.7}}px;" 
+          mode="aspectFill" 
+          alt="{{item.text || '按钮'}}"
+        />
+        <text wx:if="{{item.text}}" style="font-size: 28rpx;">{{item.text}}</text>
+      </view>
+    </block>
+  </view>
+  
+  <!-- 状态栏占位 -->
+  <view class="statusbar" style="height:{{statusbarheight}}px;width: 100%;"></view>
+  
+  <!-- 标题区域 -->
+  <view 
+    class="title" 
+    style="height:{{height}}px; margin:{{menumargin}}px 0; text-align: {{titleAlign}}; padding-left: {{titleAlign === 'left' ? (!leftButtons.length || leftButtons.length == 1 ? '80rpx' : (leftButtons.length*80 + 'rpx')) : '0'}}; justify-content: {{titleAlign  === 'left' ? 'start' : 'center'}};"
+  >
+    {{title}}
+  </view>
+</view>

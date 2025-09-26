@@ -1,0 +1,29 @@
+<!--pages/watch/watch.wxml-->
+<view class="container">
+  <view class="card">
+    <text class="title">监听器演示</text>
+    
+    <view class="section">
+      <text>Message: {{message}}</text>
+      <button class="btn" bindtap="changeMessage">修改Message</button>
+    </view>
+    
+    <view class="section">
+      <text>Counter: {{counter}}</text>
+      <button class="btn" bindtap="incrementCounter">增加计数</button>
+    </view>
+    
+    <view class="section">
+      <text>用户名: {{userInfo.name}}</text>
+      <button class="btn" bindtap="updateUserName">更新用户名</button>
+    </view>
+    
+    <view class="section">
+      <text>分数列表:</text>
+      <view wx:for="{{userInfo.scores}}" wx:key="index" class="score-item">
+        <text>{{index + 1}}. {{item}}分</text>
+      </view>
+      <button class="btn" bindtap="addScore">添加分数</button>
+    </view>
+  </view>
+</view>

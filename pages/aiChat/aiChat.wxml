@@ -1,0 +1,122 @@
+<!--pages/aiChat/aiChat.wxml-->
+<view class="container">
+  <!-- 初始页面内容 -->
+  <view class="hero" wx:if="{{!isChatActive}}">
+    <view class="hero-title">询问任何科学问题</view>
+    <view class="hero-subtitle">让AI为您导航复杂的科学世界</view>
+
+    <view class="ai-textarea">
+      <textarea class="ai-textarea-info" placeholder-class="ai-textarea-holder" cols="30" rows="6" placeholder="询问任何科学问题" bindtap="askQuestion" data-question=""></textarea>
+    </view>
+    
+    <view class="question-examples">
+      <view class="question-card" bindtap="askQuestion" data-question="资产价格中的非正态性与极端事件如何建模？">
+        <view class="card-title">资产价格中的非正态性与极端事件如何建模？</view>
+        <view class="card-subtitle">金融数学与风险管理</view>
+      </view>
+      
+      <view class="question-card" bindtap="askQuestion" data-question="收入不平等对社会稳定的影响？">
+        <view class="card-title">收入不平等对社会稳定的影响？</view>
+        <view class="card-subtitle">社会科学与经济学</view>
+      </view>
+      
+      <view class="question-card" bindtap="askQuestion" data-question="纳米材料性能与尺度的关系是什么？">
+        <view class="card-title">纳米材料性能与尺度的关系是什么？</view>
+        <view class="card-subtitle">材料科学与纳米技术</view>
+      </view>
+      
+      <view class="question-card" bindtap="askQuestion" data-question="铁硅合金如何哪种涂层">
+        <view class="card-title">铁硅合金如何哪种涂层</view>
+        <view class="card-subtitle">材料工程与表面处理</view>
+      </view>
+    </view>
+  </view>
+  
+  <!-- 聊天界面 -->
+  <view class="chat-container" wx:if="{{isChatActive}}">
+    
+    <scroll-view class="messages" style="height: calc(100vh - 144rpx);" scroll-y scroll-top="{{scrollTop}}">
+      <view class="flex-container">
+        <!-- 用户消息 -->
+        <block wx:for="{{messages}}" wx:key="index">
+          <view class="message {{item.role}}-message">
+            {{item.content}}
+            
+            <!-- AI思考过程 -->
+            <view wx:if="{{item.role === 'ai'}}" class="thinking-process">
+              <view class="thinking-process" wx:if="{{item.type === 'thinking' || item.type === 'conclusion'}}">
+                
+                <!-- 步骤1：理解问题 -->
+                <view class="process-step">
+                  <view class="step-title">
+                    <checkbox checked="{{item.step1.checked}}" disabled />
+                    <text>{{item.step1.title}}</text>
+                  </view>
+                  <view class="keywords">
+                    <view class="keyword" wx:for="{{item.step1.keywords}}" wx:key="index">
+                      <checkbox checked="{{item.checked}}" disabled />
+                      <text>{{item.text}}</text>
+                    </view>
+                  </view>
+                </view>
+                
+                <!-- 步骤2：分析问题 -->
+                <view class="process-step">
+                  <view class="step-title">
+                    <checkbox checked="{{item.step2.checked}}" disabled />
+                    <text>{{item.step2.title}}</text>
+                  </view>
+                  <view class="sub-questions">
+                    <view class="sub-question" wx:for="{{item.step2.questions}}" wx:key="index">
+                      <text class="sub-question-text">{{item.text}}</text>
+                      <!-- 子问题的关键词 -->
+                      <view class="keywords" wx:if="{{item.keywords}}">
+                        <view class="keyword" wx:for="{{item.keywords}}" wx:key="index">
+                          <checkbox checked="{{item.checked}}" disabled />
+                          <text>{{item.text}}</text>
+                        </view>
+                      </view>
+                    </view>
+                  </view>
+                </view>
+                
+                <!-- 打字指示器 -->
+                <view class="typing-indicator" wx:if="{{item.showTyping}}">
+                  <view class="dot"></view>
+                  <view class="dot"></view>
+                  <view class="dot"></view>
+                </view>
+              </view>
+
+              <!-- 结论部分 -->
+              <view class="conclusion-section" wx:if="{{item.type === 'conclusion' && item.showConclusion}}">
+                <view class="conclusion-title">
+                  <text>基于以上分析，结论如下</text>
+                </view>
+                <view class="conclusion-content">
+                  <rich-text nodes="{{item.conclusionContent}}"></rich-text>
+                </view>
+              </view>
+            </view>
+          </view>
+        </block>
+      </view>
+    </scroll-view>
+    
+    <view class="input-area">
+      <view class="input-container">
+        <view class="input-box">
+          <input 
+            type="text" 
+            placeholder="输入科学问题..." 
+            bindfocus="activateChat"
+            bindconfirm="sendMessage"
+            model:value="{{inputValue}}"
+          />
+          <button bindtap="sendMessage"><image src="/assets/send.png" class="send-icon" /></button>
+        </view>
+      </view>
+      <view class="disclaimer">内容由 AI 生成，请仔细甄别</view>
+    </view>
+  </view>
+</view>
